@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "236f5f98-29f3-4eaa-8eb3-4c59292bce6a",
+		"name": "BadCake_server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12918522"
+	},
+	"item": [
+		{
+			"name": "AuthenticationToken Needed Requests",
+			"item": [
+				{
+					"name": "saveLathundData",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Testar Lathund\",\r\n    \"shortDescription\" : \"Testar kort beskrivning\",\r\n    \"description\" : \"Testar beskrivning, denna skall vara längre!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund",
+							"protocol": "https",
+							"host": [
+								"badcakeserver-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"rest",
+								"lathund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllLathundData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund",
+							"protocol": "https",
+							"host": [
+								"badcakeserver-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"rest",
+								"lathund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLathundDataById",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund/4",
+							"protocol": "https",
+							"host": [
+								"badcakeserver-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"rest",
+								"lathund",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveLinkLibraryData",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Look at videos\",\r\n    \"prefix\" : \"youtube\",\r\n    \"link\" : \"https://www.youtube.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary",
+							"protocol": "https",
+							"host": [
+								"badcakeserver-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"rest",
+								"linklibrary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllLinkLibraryData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary",
+							"protocol": "https",
+							"host": [
+								"badcakeserver-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"rest",
+								"linklibrary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLinkLibraryDataById",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary/1",
+							"protocol": "https",
+							"host": [
+								"badcakeserver-production",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"rest",
+								"linklibrary",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"password\": \"password11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/login",
+					"protocol": "https",
+					"host": [
+						"badcakeserver-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"email\": \"zoora12334@hotmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/register",
+					"protocol": "https",
+					"host": [
+						"badcakeserver-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1. reset password email",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYWthbmthcmxzc29uIiwiaWF0IjoxNzAyMjAyNzgxLCJleHAiOjE3MDIyMDI4NTF9.0LO0iWtsGQo4P3JuOpWvRMq2FFhDMOh9ArSNVcGERTL9WxldVHVhRVXpdZIlyLCgMHFSzwtkwmAGxo1JG_HhUA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/resetpasswordemail?email=zoora1234@hotmail.com",
+					"protocol": "https",
+					"host": [
+						"badcakeserver-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"resetpasswordemail"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "zoora1234@hotmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.2 reset password",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYWthbmthcmxzc29uIiwiaWF0IjoxNzAyMjAyNzgxLCJleHAiOjE3MDIyMDI4NTF9.0LO0iWtsGQo4P3JuOpWvRMq2FFhDMOh9ArSNVcGERTL9WxldVHVhRVXpdZIlyLCgMHFSzwtkwmAGxo1JG_HhUA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/resetpassword?token=68330019-fdb2-49ca-b170-5c0ec95505a8&newPassword=password2",
+					"protocol": "https",
+					"host": [
+						"badcakeserver-production",
+						"up",
+						"railway",
+						"app"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"resetpassword"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "68330019-fdb2-49ca-b170-5c0ec95505a8"
+						},
+						{
+							"key": "newPassword",
+							"value": "password2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
