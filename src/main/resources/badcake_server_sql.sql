@@ -13,30 +13,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Dumpar struktur för tabell sql11669080.lathund
-CREATE TABLE IF NOT EXISTS `lathund` (
+CREATE TABLE IF NOT EXISTS `shortnotes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(500) NOT NULL,
   `short_description` varchar(500) NOT NULL,
   `description` varchar(5000) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userToLathund` (`user_id`),
-  CONSTRAINT `userToLathund` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  KEY `userToShortnotes` (`user_id`),
+  CONSTRAINT `userToShortnotes` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dataexport var bortvalt.
 
 -- Dumpar struktur för tabell sql11669080.link_library
-CREATE TABLE IF NOT EXISTS `link_library` (
+CREATE TABLE IF NOT EXISTS `links` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) NOT NULL,
   `prefix` varchar(500) NOT NULL,
   `link` varchar(500) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userToLinkLibrary` (`user_id`),
-  CONSTRAINT `userToLinkLibrary` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `userToLink` (`user_id`),
+  CONSTRAINT `userToLink` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- Dataexport var bortvalt.
 
@@ -45,11 +45,11 @@ CREATE TABLE IF NOT EXISTS `reset_password_token` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(500) NOT NULL,
   `expiry_date` datetime NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userToResetPasswordToken` (`user_id`),
-  CONSTRAINT `userToResetPasswordToken` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+  CONSTRAINT `userToResetPasswordToken` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- Dataexport var bortvalt.
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 
 -- Dumpar struktur för tabell sql11669080.users
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(500) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumpar struktur för tabell sql11669080.user_roles
 CREATE TABLE IF NOT EXISTS `user_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` varchar(50) NOT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -91,3 +91,6 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+
+
+

@@ -1,8 +1,8 @@
 package com.dkserver.danielServer.controllers;
 
 
-import com.dkserver.danielServer.models.Lathund;
-import com.dkserver.danielServer.models.LinkLibrary;
+import com.dkserver.danielServer.models.ShortNote;
+import com.dkserver.danielServer.models.Link;
 import com.dkserver.danielServer.services.NoteBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,57 +19,57 @@ public class NoteBookController {
     @Autowired
     NoteBookService noteBookService;
 
-    @PostMapping("/lathund")
-    public ResponseEntity<String> saveLathundData(@RequestBody Lathund lathund){
-        Lathund latundData = noteBookService.saveLathundDataToDb(lathund);
+    @PostMapping("/shortnote")
+    public ResponseEntity<String> saveLathundData(@RequestBody ShortNote shortNote){
+        ShortNote latundData = noteBookService.saveLathundDataToDb(shortNote);
         if(latundData == null){
             return new ResponseEntity<>("Something went wrong!", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("Lathundpost uploaded successful!", HttpStatus.CREATED);
+        return new ResponseEntity<>("shortnote post uploaded successful!", HttpStatus.CREATED);
     }
 
-    @GetMapping("/lathund")
+    @GetMapping("/shortnote")
     public ResponseEntity getAllLathundData(){
-        List<Lathund> latundData = noteBookService.getAllLathundDataFromDb();
+        List<ShortNote> latundData = noteBookService.getAllLathundDataFromDb();
         if(latundData.size() == 0){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Lathundposts found!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No shortNotes posts found!");
         }
         return ResponseEntity.status(HttpStatus.OK).body(latundData);
     }
 
-    @DeleteMapping("/lathund/{id}")
+    @DeleteMapping("/shortnote/{id}")
     public ResponseEntity<String> deleteLathundDataById(@PathVariable Integer id){
             String response = noteBookService.deleteLathundPostById(id);
             if(response == null) {
-                return new ResponseEntity<>("No Lathundposts found with that id!", HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>("No shortnote posts found with that id!", HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
-    @PostMapping("/linklibrary")
-    public ResponseEntity<String> saveLinkLibraryData(@RequestBody LinkLibrary linkLibrary){
-        LinkLibrary linkLibraryData = noteBookService.saveLinkLibraryDataToDb(linkLibrary);
-        if(linkLibraryData == null){
+    @PostMapping("/link")
+    public ResponseEntity<String> saveLinkLibraryData(@RequestBody Link link){
+        Link linkData = noteBookService.saveLinkLibraryDataToDb(link);
+        if(linkData == null){
             return new ResponseEntity<>("Something went wrong!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("Linkpost uploaded successful!", HttpStatus.CREATED);
     }
 
-    @GetMapping("/linklibrary")
+    @GetMapping("/link")
     public ResponseEntity getAllLinkLibraryData(){
-        List<LinkLibrary> linkLibraryData = noteBookService.getAllLinkLibraryDataFromDb();
-        if(linkLibraryData.size() == 0){
+        List<Link> linkData = noteBookService.getAllLinkLibraryDataFromDb();
+        if(linkData.size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Linkposts found!");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(linkLibraryData);
+        return ResponseEntity.status(HttpStatus.OK).body(linkData);
     }
 
-    @DeleteMapping("/linklibrary/{id}")
+    @DeleteMapping("/link/{id}")
     public ResponseEntity<String> deletelinkLibraryDataById(@PathVariable Integer id){
         String response = noteBookService.deleteLinkLibraryPostById(id);
         if(response == null) {
-            return new ResponseEntity<>("No LinkLibraryposts found with that id!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No Linkpost found with that id!", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

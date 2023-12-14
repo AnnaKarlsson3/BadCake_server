@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthService {
@@ -85,7 +86,7 @@ public class AuthService {
             return null;
         }
         UserEntity user = new UserEntity();
-      //user.setUuid(UUID.randomUUID());
+        user.setId(String.valueOf(UUID.randomUUID()));
         user.setUsername(registerDto.getUsername());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
@@ -94,6 +95,8 @@ public class AuthService {
         user.setRoles(Collections.singletonList(roles));
 
         userRepo.save(user);
+
+
         return user.getUsername();
     }
 
@@ -122,8 +125,8 @@ public class AuthService {
         ResetPasswordToken resetToken = resetPasswordTokenRepository.findByToken(token);
 
         if (resetToken != null && !resetToken.isExpired()) {
-            int userId = resetToken.getUserId();
-            Optional<UserEntity> user = userRepo.findById(userId);
+            String userId = resetToken.getUserId();
+            Optional<UserEntity> user = userRepo.findUserById(userId);
             user.get().setPassword(passwordEncoder.encode(newPassword));
             userRepo.save(user.get());
             resetPasswordTokenRepository.delete(resetToken);

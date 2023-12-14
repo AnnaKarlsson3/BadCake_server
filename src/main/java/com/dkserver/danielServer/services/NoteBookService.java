@@ -1,11 +1,11 @@
 package com.dkserver.danielServer.services;
 
 
-import com.dkserver.danielServer.models.Lathund;
-import com.dkserver.danielServer.models.LinkLibrary;
+import com.dkserver.danielServer.models.ShortNote;
+import com.dkserver.danielServer.models.Link;
 import com.dkserver.danielServer.models.UserEntity;
-import com.dkserver.danielServer.repository.LathundRepo;
-import com.dkserver.danielServer.repository.LinkLibraryRepo;
+import com.dkserver.danielServer.repository.ShortnoteRepo;
+import com.dkserver.danielServer.repository.LinkRepo;
 import com.dkserver.danielServer.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,61 +19,61 @@ import java.util.Optional;
 public class NoteBookService {
 
     @Autowired
-    LathundRepo lathundRepo;
+    ShortnoteRepo shortnoteRepo;
     @Autowired
-    LinkLibraryRepo linkLibraryRepo;
+    LinkRepo linkRepo;
     @Autowired
     UserRepo userRepo;
 
 
-    public Lathund saveLathundDataToDb(Lathund lathund) {
+    public ShortNote saveLathundDataToDb(ShortNote shortNote) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        lathund.setUserId(user.get().getId());
-        return lathundRepo.save(lathund);
+        shortNote.setUserId(user.get().getId());
+        return shortnoteRepo.save(shortNote);
     }
 
-    public List<Lathund> getAllLathundDataFromDb() {
+    public List<ShortNote> getAllLathundDataFromDb() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        return lathundRepo.findAllByUserId(user.get().getId());
+        return shortnoteRepo.findAllByUserId(user.get().getId());
     }
 
     public String deleteLathundPostById (int id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        Lathund lathundPost = lathundRepo.findByIdAndUserId(id, user.get().getId());
+        ShortNote shortNotePost = shortnoteRepo.findByIdAndUserId(id, user.get().getId());
 
-        if(lathundPost == null){
+        if(shortNotePost == null){
             return null;
         }
-        lathundRepo.deleteByIdAndUserId(id, user.get().getId());
-        return "Lathundpost deleted successful!";
+        shortnoteRepo.deleteByIdAndUserId(id, user.get().getId());
+        return "Shortnote post deleted successful!";
     }
 
-    public LinkLibrary saveLinkLibraryDataToDb(LinkLibrary linkLibrary) {
+    public Link saveLinkLibraryDataToDb(Link link) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        linkLibrary.setUserId(user.get().getId());
-        return linkLibraryRepo.save(linkLibrary);
+        link.setUserId(user.get().getId());
+        return linkRepo.save(link);
     }
 
-    public List<LinkLibrary> getAllLinkLibraryDataFromDb() {
+    public List<Link> getAllLinkLibraryDataFromDb() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        return linkLibraryRepo.findAllByUserId(user.get().getId());
+        return linkRepo.findAllByUserId(user.get().getId());
     }
 
     public String deleteLinkLibraryPostById (int id){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        LinkLibrary linkLibraryPost = linkLibraryRepo.findByIdAndUserId(id, user.get().getId());
+        Link linkPost = linkRepo.findByIdAndUserId(id, user.get().getId());
 
-        if(linkLibraryPost == null){
+        if(linkPost == null){
             return null;
         }
-        linkLibraryRepo.deleteByIdAndUserId(id, user.get().getId());
-        return "LinkLibrarypost deleted successful!";
+        linkRepo.deleteByIdAndUserId(id, user.get().getId());
+        return "Linkpost deleted successful!";
     }
 
 

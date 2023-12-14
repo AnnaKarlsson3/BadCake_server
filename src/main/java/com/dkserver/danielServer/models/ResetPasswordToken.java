@@ -16,7 +16,7 @@ public class ResetPasswordToken {
 
     private String token;
     private LocalDateTime expiryDate;
-    private int userId;
+    private String userId;
 
     public boolean isExpired() {
         return LocalDateTime.now().isAfter(expiryDate);
