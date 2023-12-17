@@ -31,8 +31,6 @@ import static com.dkserver.danielServer.utils.Constants.*;
 @Service
 public class AuthService {
 
-    //TODO: set string to constants.class
-
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -118,7 +116,6 @@ public class AuthService {
         return null;
     }
 
-    //TODO: Lägg strings i constants.class
     public void sendResetPasswordEmail(String email, String resetToken) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
