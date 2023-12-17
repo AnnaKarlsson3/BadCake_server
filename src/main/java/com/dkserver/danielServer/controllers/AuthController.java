@@ -5,18 +5,12 @@ import com.dkserver.danielServer.dto.AuthResponseDto;
 import com.dkserver.danielServer.dto.LoginDto;
 import com.dkserver.danielServer.dto.RegisterDto;
 import com.dkserver.danielServer.models.UserEntity;
-import com.dkserver.danielServer.security.CustomUserDetailsService;
 import com.dkserver.danielServer.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.parser.Entity;
 import java.util.Optional;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -25,6 +19,8 @@ public class AuthController {
 
     @Autowired
     AuthService authService;
+
+    //TODO: set string to constants.class
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginDto loginDto){

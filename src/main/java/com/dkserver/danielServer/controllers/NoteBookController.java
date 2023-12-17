@@ -16,30 +16,32 @@ import java.util.List;
 @RequestMapping("/rest")
 public class NoteBookController {
 
+    //TODO: set string to constants.class
+
     @Autowired
     NoteBookService noteBookService;
 
     @PostMapping("/shortnote")
-    public ResponseEntity<String> saveLathundData(@RequestBody ShortNote shortNote){
-        ShortNote latundData = noteBookService.saveLathundDataToDb(shortNote);
-        if(latundData == null){
+    public ResponseEntity<String> saveShortNoteData(@RequestBody ShortNote shortNote){
+        ShortNote shortNotesData = noteBookService.saveShortNoteDataToDb(shortNote);
+        if(shortNotesData == null){
             return new ResponseEntity<>("Something went wrong!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>("shortnote post uploaded successful!", HttpStatus.CREATED);
     }
 
     @GetMapping("/shortnote")
-    public ResponseEntity getAllLathundData(){
-        List<ShortNote> latundData = noteBookService.getAllLathundDataFromDb();
-        if(latundData.size() == 0){
+    public ResponseEntity getAllShortNotesData(){
+        List<ShortNote> shortNotesData = noteBookService.getAllShortNotesDataFromDb();
+        if(shortNotesData.size() == 0){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No shortNotes posts found!");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(latundData);
+        return ResponseEntity.status(HttpStatus.OK).body(shortNotesData);
     }
 
     @DeleteMapping("/shortnote/{id}")
-    public ResponseEntity<String> deleteLathundDataById(@PathVariable Integer id){
-            String response = noteBookService.deleteLathundPostById(id);
+    public ResponseEntity<String> deleteShortNoteDataById(@PathVariable Integer id){
+            String response = noteBookService.deleteShortNotePostById(id);
             if(response == null) {
                 return new ResponseEntity<>("No shortnote posts found with that id!", HttpStatus.NOT_FOUND);
             }

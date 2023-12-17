@@ -11,7 +11,6 @@ import com.dkserver.danielServer.repository.UserRepo;
 import com.dkserver.danielServer.security.JwtGenerator;
 import com.dkserver.danielServer.repository.ResetPasswordTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +27,8 @@ import java.util.UUID;
 
 @Service
 public class AuthService {
+
+    //TODO: set string to constants.class
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -52,6 +53,9 @@ public class AuthService {
 
     @Autowired
     private ResetPasswordTokenRepository resetPasswordTokenRepository;
+
+    @Autowired
+    private DatabaseCreationService databaseCreationService;
 
     public String loginUser(LoginDto loginDto) {
         String token = "";
@@ -82,20 +86,20 @@ public class AuthService {
 
 
     public String saveRegistration(RegisterDto registerDto) {
-        if(userRepo.existsByUsername(registerDto.getUsername())){
+        if(userRepo.existsByUsername(registerDto.getUsername()) || userRepo.existsByEmail(registerDto.getEmail())){
             return null;
         }
         UserEntity user = new UserEntity();
         user.setId(String.valueOf(UUID.randomUUID()));
-        user.setUsername(registerDto.getUsername());
+        user.setUsername(registerDto.getUsername().toLowerCase());
         user.setEmail(registerDto.getEmail());
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
 
         Role roles = roleRepo.findByName("USER").get();
         user.setRoles(Collections.singletonList(roles));
 
+        databaseCreationService.createDatabaseForUser(user.getId());
         userRepo.save(user);
-
 
         return user.getUsername();
     }
@@ -111,6 +115,7 @@ public class AuthService {
         return null;
     }
 
+    //TODO: Lägg strings i constants.class
     public void sendResetPasswordEmail(String email, String resetToken) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);

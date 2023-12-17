@@ -18,6 +18,8 @@ import java.util.Optional;
 @Service
 public class NoteBookService {
 
+    //TODO: set string to constants.class
+
     @Autowired
     ShortnoteRepo shortnoteRepo;
     @Autowired
@@ -25,29 +27,20 @@ public class NoteBookService {
     @Autowired
     UserRepo userRepo;
 
-
-    public ShortNote saveLathundDataToDb(ShortNote shortNote) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        shortNote.setUserId(user.get().getId());
+    public ShortNote saveShortNoteDataToDb(ShortNote shortNote) {
         return shortnoteRepo.save(shortNote);
     }
 
-    public List<ShortNote> getAllLathundDataFromDb() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        return shortnoteRepo.findAllByUserId(user.get().getId());
+    public List<ShortNote> getAllShortNotesDataFromDb() {
+        return shortnoteRepo.findAll();
     }
 
-    public String deleteLathundPostById (int id){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
-        ShortNote shortNotePost = shortnoteRepo.findByIdAndUserId(id, user.get().getId());
-
+    public String deleteShortNotePostById(int id){
+        Optional<ShortNote> shortNotePost = shortnoteRepo.findById(id);
         if(shortNotePost == null){
             return null;
         }
-        shortnoteRepo.deleteByIdAndUserId(id, user.get().getId());
+        shortnoteRepo.deleteById(id);
         return "Shortnote post deleted successful!";
     }
 

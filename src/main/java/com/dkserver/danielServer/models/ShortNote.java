@@ -1,7 +1,5 @@
 package com.dkserver.danielServer.models;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +16,9 @@ public class ShortNote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String userId;
     private String title;
+
+    @Column(name="short_description")
     private String shortDescription;
     private String description;
 

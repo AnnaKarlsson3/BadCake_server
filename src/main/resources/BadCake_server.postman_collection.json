@@ -10,7 +10,7 @@
 			"name": "AuthenticationToken Needed Requests",
 			"item": [
 				{
-					"name": "saveLathundData",
+					"name": "saveShortNoteData",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -33,24 +33,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/shortnote",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"lathund"
+								"shortnote"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getAllLathundData",
+					"name": "getAllShortnoteData",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -76,24 +74,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/shortnote",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"lathund"
+								"shortnote"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteLathundDataById",
+					"name": "deleteShortnoteDataById",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -116,17 +112,15 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund/4",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/shortnote/4",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"lathund",
+								"shortnote",
 								"4"
 							]
 						}
@@ -134,7 +128,7 @@
 					"response": []
 				},
 				{
-					"name": "saveLinkLibraryData",
+					"name": "saveLinkData",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -157,24 +151,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/link",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"linklibrary"
+								"link"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getAllLinkLibraryData",
+					"name": "getAllLinkData",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -200,24 +192,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/link",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"linklibrary"
+								"link"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteLinkLibraryDataById",
+					"name": "deleteLinkDataById",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -240,17 +230,15 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary/1",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/link/1",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"linklibrary",
+								"link",
 								"1"
 							]
 						}
@@ -279,7 +267,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"password\": \"password11\"\r\n}",
+					"raw": "{\r\n    \"username\": \"zoora\",\r\n    \"password\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -287,14 +275,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/login",
-					"protocol": "https",
+					"raw": "http://localhost:8080/rest/auth/login",
+					"protocol": "http",
 					"host": [
-						"badcakeserver-production",
-						"up",
-						"railway",
-						"app"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"rest",
 						"auth",
@@ -361,14 +347,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/resetpasswordemail?email=zoora1234@hotmail.com",
-					"protocol": "https",
+					"raw": "http://localhost:8080/rest/auth/resetpasswordemail?email=zoora1234@hotmail.com",
+					"protocol": "http",
 					"host": [
-						"badcakeserver-production",
-						"up",
-						"railway",
-						"app"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"rest",
 						"auth",

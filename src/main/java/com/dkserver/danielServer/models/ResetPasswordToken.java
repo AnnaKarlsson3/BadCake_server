@@ -15,7 +15,9 @@ public class ResetPasswordToken {
     private int id;
 
     private String token;
+    @Column(name="expiry_date")
     private LocalDateTime expiryDate;
+    @Column(name="user_id")
     private String userId;
 
     public boolean isExpired() {
