@@ -47,7 +47,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    //passwordEncoder -> stores password in hash in db
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }

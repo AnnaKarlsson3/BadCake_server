@@ -1,7 +1,6 @@
 package com.dkserver.danielServer.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,16 +10,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="lathund")
-public class Lathund {
+@Table(name="links")
+public class LinkEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int userId;
-    private String title;
-    private String shortDescription;
-    private String description;
+    @Column(name="user_id")
+    private String userId;
+    private String name;
+    private String prefix;
+    private String link;
 
 }

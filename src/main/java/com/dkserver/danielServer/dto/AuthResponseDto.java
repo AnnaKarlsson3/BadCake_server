@@ -1,7 +1,6 @@
 package com.dkserver.danielServer.dto;
 
 import com.dkserver.danielServer.models.UserEntity;
-import com.dkserver.danielServer.security.CustomUserDetailsService;
 import lombok.Data;
 
 import java.util.Optional;
@@ -16,6 +15,7 @@ public class AuthResponseDto {
     public AuthResponseDto(String accessToken, Optional<UserEntity> user) {
         this.accessToken = accessToken;
         this.user = user;
+
     }
 }
 

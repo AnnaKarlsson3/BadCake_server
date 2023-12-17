@@ -10,7 +10,7 @@
 			"name": "AuthenticationToken Needed Requests",
 			"item": [
 				{
-					"name": "saveLathundData",
+					"name": "saveShortNoteData",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -20,6 +20,11 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -33,24 +38,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/shortnote",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"lathund"
+								"shortnote"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getAllLathundData",
+					"name": "getAllShortnoteData",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -76,24 +79,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/shortnote",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"lathund"
+								"shortnote"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteLathundDataById",
+					"name": "deleteShortnoteDataById",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -116,17 +117,15 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/lathund/4",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/shortnote/4",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"lathund",
+								"shortnote",
 								"4"
 							]
 						}
@@ -134,7 +133,7 @@
 					"response": []
 				},
 				{
-					"name": "saveLinkLibraryData",
+					"name": "saveLinkData",
 					"request": {
 						"auth": {
 							"type": "bearer"
@@ -144,6 +143,11 @@
 							{
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
 								"type": "text"
 							}
 						],
@@ -157,24 +161,22 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/link",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"linklibrary"
+								"link"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getAllLinkLibraryData",
+					"name": "getAllLinkData",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -188,45 +190,10 @@
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
 								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary",
-							"protocol": "https",
-							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
-							],
-							"path": [
-								"rest",
-								"linklibrary"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteLinkLibraryDataById",
-					"request": {
-						"auth": {
-							"type": "bearer"
-						},
-						"method": "DELETE",
-						"header": [
+							},
 							{
-								"key": "Authorization",
-								"value": "Bearer {{accessToken}}",
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
 								"type": "text"
 							}
 						],
@@ -240,18 +207,148 @@
 							}
 						},
 						"url": {
-							"raw": "https://badcakeserver-production.up.railway.app/rest/linklibrary/1",
-							"protocol": "https",
+							"raw": "http://localhost:8080/rest/link",
+							"protocol": "http",
 							"host": [
-								"badcakeserver-production",
-								"up",
-								"railway",
-								"app"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"rest",
-								"linklibrary",
-								"1"
+								"link"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLinkDataById",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rest/link/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"link",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveCustomerData",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"företag 2\",\r\n    \"orgNr\" : \"1234AA34\",\r\n    \"contact\" : \"nanna\",\r\n    \"contactPhone\": \"0722335566\",\r\n    \"adminName\" : \"prince\",\r\n    \"adminPassword\" : \"password\",\r\n    \"address\": \"göteborgsvägen 3\",\r\n    \"postNo\" : \"45223\",\r\n    \"city\" : \"göteborg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rest/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCustomerData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rest/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"customer"
 							]
 						}
 					},
@@ -268,6 +365,11 @@
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"var userId = responseJson.user.id;\r",
+							"pm.environment.set(\"id\", userId);\r",
+							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -279,7 +381,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"password\": \"password11\"\r\n}",
+					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"password\": \"password1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -287,14 +389,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/login",
-					"protocol": "https",
+					"raw": "http://localhost:8080/rest/auth/login",
+					"protocol": "http",
 					"host": [
-						"badcakeserver-production",
-						"up",
-						"railway",
-						"app"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"rest",
 						"auth",
@@ -311,7 +411,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"email\": \"zoora12334@hotmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"email\": \"zoora1234@hotmail.com\",\r\n    \"password\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -319,14 +419,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/register",
-					"protocol": "https",
+					"raw": "http://localhost:8080/rest/auth/register",
+					"protocol": "http",
 					"host": [
-						"badcakeserver-production",
-						"up",
-						"railway",
-						"app"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"rest",
 						"auth",
@@ -361,14 +459,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/resetpasswordemail?email=zoora1234@hotmail.com",
-					"protocol": "https",
+					"raw": "http://localhost:8080/rest/auth/resetpasswordemail?email=zoora1234@hotmail.com",
+					"protocol": "http",
 					"host": [
-						"badcakeserver-production",
-						"up",
-						"railway",
-						"app"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"rest",
 						"auth",

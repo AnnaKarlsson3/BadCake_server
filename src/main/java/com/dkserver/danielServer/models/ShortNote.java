@@ -1,6 +1,5 @@
 package com.dkserver.danielServer.models;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,16 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="link_library")
-public class LinkLibrary {
+@Table(name="shortnotes")
+public class ShortNote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int userId;
-    private String name;
-    private String prefix;
-    private String link;
+    private String title;
+
+    @Column(name="short_description")
+    private String shortDescription;
+    private String description;
+    @Column(name="user_id")
+    private String userId;
 
 }
