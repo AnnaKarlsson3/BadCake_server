@@ -1,9 +1,11 @@
 package com.dkserver.danielServer.services;
 
 
+import com.dkserver.danielServer.models.Customer;
 import com.dkserver.danielServer.models.ShortNote;
 import com.dkserver.danielServer.models.Link;
 import com.dkserver.danielServer.models.UserEntity;
+import com.dkserver.danielServer.repository.CustomerRepo;
 import com.dkserver.danielServer.repository.ShortnoteRepo;
 import com.dkserver.danielServer.repository.LinkRepo;
 import com.dkserver.danielServer.repository.UserRepo;
@@ -18,12 +20,28 @@ import java.util.Optional;
 @Service
 public class NoteBookService {
 
+
+    @Autowired
+    CustomerRepo customerRepo;
     @Autowired
     ShortnoteRepo shortnoteRepo;
     @Autowired
     LinkRepo linkRepo;
     @Autowired
     UserRepo userRepo;
+
+    public Customer saveCustomerDataToDb(Customer customer) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
+        customer.setUserId(user.get().getId());
+        return customerRepo.save(customer);
+    }
+
+    public List<Customer> getAllCustomerDataFromDb() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Optional<UserEntity> user = userRepo.findByUsername(authentication.getName());
+        return customerRepo.findAllByUserId(user.get().getId());
+    }
 
 
     public ShortNote saveLathundDataToDb(ShortNote shortNote) {
