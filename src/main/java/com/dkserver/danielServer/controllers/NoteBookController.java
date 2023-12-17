@@ -1,6 +1,7 @@
 package com.dkserver.danielServer.controllers;
 
 
+import com.dkserver.danielServer.models.Customer;
 import com.dkserver.danielServer.models.ShortNote;
 import com.dkserver.danielServer.models.Link;
 import com.dkserver.danielServer.services.NoteBookService;
@@ -20,6 +21,23 @@ public class NoteBookController {
 
     @Autowired
     NoteBookService noteBookService;
+
+    @PostMapping("/customer")
+    public ResponseEntity<String> saveCustomerData(@RequestBody Customer customer){
+        Customer customerData = noteBookService.saveCustomerDataToDb(customer);
+        if(customer == null){
+            return new ResponseEntity<>("Something went wrong!", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Customer post uploaded successful!", HttpStatus.CREATED);
+    }
+    @GetMapping("/customer")
+    public ResponseEntity getAllCustomerData(){
+        List<Customer> customerData = noteBookService.getAllCustomerDataFromDb();
+        if(customerData.size() == 0){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No customersfound!");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(customerData);
+    }
 
     @PostMapping("/shortnote")
     public ResponseEntity<String> saveShortNoteData(@RequestBody ShortNote shortNote){
