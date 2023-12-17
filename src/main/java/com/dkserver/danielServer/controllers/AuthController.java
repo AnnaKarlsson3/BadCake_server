@@ -12,15 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
+import static com.dkserver.danielServer.utils.Constants.*;
+
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
-@RequestMapping("/rest/auth")
+@CrossOrigin(origins = CORS_URL)
+@RequestMapping(REST_AUTH)
 public class AuthController {
 
     @Autowired
     AuthService authService;
-
-    //TODO: set string to constants.class
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginDto loginDto){
@@ -29,7 +29,7 @@ public class AuthController {
             Optional<UserEntity> user = authService.returnLoggedInUser(token, loginDto);
             return ResponseEntity.status(HttpStatus.OK).body(new AuthResponseDto(token, user));
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Wrong username or password!");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(AUTH_RESPONSE_NO_FOUND);
     }
 
 
@@ -37,9 +37,9 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
         String username = authService.saveRegistration(registerDto);
         if(username == null){
-            return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(AUTH_RESPONSE_TAKEN, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("User registered success!", HttpStatus.CREATED);
+        return new ResponseEntity<>(AUTH_RESPONSE_UPLOAD_SUCCESS, HttpStatus.CREATED);
     }
 
 
@@ -47,7 +47,7 @@ public class AuthController {
     public ResponseEntity<String> resetPassword(@RequestParam String email) {
         String response = authService.setResetPasswordToken(email);
         if(response == null){
-            return new ResponseEntity<>("Something is wrong!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ERROR_RESPONSE_SOMETHING_WRONG, HttpStatus.BAD_REQUEST);
         }
             return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -56,9 +56,9 @@ public class AuthController {
         public ResponseEntity<String> updatePassword(@RequestParam String token, @RequestParam String newPassword) {
         // Validate the token and reset the password
         if (authService.resetPassword(token, newPassword)) {
-            return new ResponseEntity<>("Password reset successfully.", HttpStatus.OK);
+            return new ResponseEntity<>(AUTH_RESPONSE_PASSWORD_CHANGE_SUCCESS, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Invalid or expired token.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(AUTH_RESPONSE_PASSWORD_INVALID_TOKEN, HttpStatus.BAD_REQUEST);
         }
     }
 

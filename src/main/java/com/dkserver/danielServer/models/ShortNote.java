@@ -21,5 +21,7 @@ public class ShortNote {
     @Column(name="short_description")
     private String shortDescription;
     private String description;
+    @Column(name="user_id")
+    private String userId;
 
 }

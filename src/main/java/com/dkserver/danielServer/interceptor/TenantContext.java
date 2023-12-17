@@ -5,7 +5,6 @@ public class TenantContext {
     private static ThreadLocal<String> currentTenant = new InheritableThreadLocal<>();
 
     public static String getCurrentTenant() {
-        System.out.println("GET_CURRENT_TENANT " + currentTenant);
         return currentTenant.get();
     }
 

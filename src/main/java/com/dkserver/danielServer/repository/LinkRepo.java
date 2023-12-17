@@ -1,7 +1,7 @@
 package com.dkserver.danielServer.repository;
 
 
-import com.dkserver.danielServer.models.Link;
+import com.dkserver.danielServer.models.LinkEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,16 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface LinkRepo extends JpaRepository<Link, Integer> {
+public interface LinkRepo extends JpaRepository<LinkEntity, Integer> {
 
-    @Query(value = "SELECT * FROM links WHERE user_id = :userId", nativeQuery = true)
-    List<Link> findAllByUserId(@Param("userId") String userId);
+    @Query("SELECT l FROM LinkEntity l WHERE l.userId = :userId")
+    List<LinkEntity> findAllByUserId(@Param("userId") String userId);
 
-    @Query(value = "SELECT * FROM links WHERE id = :id AND user_id = :userId", nativeQuery = true)
-    Link findByIdAndUserId(@Param("id") Integer id, @Param("userId") String userId);
+    @Query("SELECT l FROM LinkEntity l WHERE l.id = :id AND l.userId = :userId")
+    LinkEntity findByIdAndUserId(@Param("id") Integer id, @Param("userId") String userId);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM links WHERE id = :id AND user_id = :userId", nativeQuery = true)
+    @Query("DELETE FROM LinkEntity l WHERE l.id = :id AND l.userId = :userId")
     void deleteByIdAndUserId(@Param("id") Integer id,@Param("userId") String userId);
 }

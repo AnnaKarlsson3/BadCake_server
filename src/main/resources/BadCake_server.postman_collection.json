@@ -21,6 +21,11 @@
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
 								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -139,6 +144,11 @@
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
 								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -180,6 +190,11 @@
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
 								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -218,6 +233,11 @@
 								"key": "Authorization",
 								"value": "Bearer {{accessToken}}",
 								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -230,7 +250,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/rest/link/1",
+							"raw": "http://localhost:8080/rest/link/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -239,7 +259,96 @@
 							"path": [
 								"rest",
 								"link",
-								"1"
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "saveCustomerData",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"företag 2\",\r\n    \"orgNr\" : \"1234AA34\",\r\n    \"contact\" : \"nanna\",\r\n    \"contactPhone\": \"0722335566\",\r\n    \"adminName\" : \"prince\",\r\n    \"adminPassword\" : \"password\",\r\n    \"address\": \"göteborgsvägen 3\",\r\n    \"postNo\" : \"45223\",\r\n    \"city\" : \"göteborg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rest/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCustomerData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{accessToken}}",
+								"type": "text"
+							},
+							{
+								"key": "X-TenantID",
+								"value": "badcake_{{id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/rest/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"customer"
 							]
 						}
 					},
@@ -256,6 +365,11 @@
 						"exec": [
 							"var jsonData = pm.response.json();\r",
 							"pm.environment.set(\"accessToken\", jsonData.accessToken);\r",
+							"\r",
+							"var responseJson = pm.response.json();\r",
+							"var userId = responseJson.user.id;\r",
+							"pm.environment.set(\"id\", userId);\r",
+							"\r",
 							""
 						],
 						"type": "text/javascript"
@@ -267,7 +381,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"zoora\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"password\": \"password1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -297,7 +411,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"email\": \"zoora12334@hotmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"username\": \"anna\",\r\n    \"email\": \"zoora1234@hotmail.com\",\r\n    \"password\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -305,14 +419,12 @@
 					}
 				},
 				"url": {
-					"raw": "https://badcakeserver-production.up.railway.app/rest/auth/register",
-					"protocol": "https",
+					"raw": "http://localhost:8080/rest/auth/register",
+					"protocol": "http",
 					"host": [
-						"badcakeserver-production",
-						"up",
-						"railway",
-						"app"
+						"localhost"
 					],
+					"port": "8080",
 					"path": [
 						"rest",
 						"auth",

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.dkserver.danielServer.utils.Constants.*;
+
 @Component
 //get the tenantID from RequestHeader
 public class RequestInterceptor implements HandlerInterceptor {
@@ -16,18 +18,15 @@ public class RequestInterceptor implements HandlerInterceptor {
         String path = request.getRequestURI();
 
         // Skip filter for register and login endpoints
-        if (path.startsWith("/rest/auth/")){
+        if (path.startsWith(REST_AUTH)){
             return true;
         }
 
-        System.out.println("In preHandle we are Intercepting the Request");
-        System.out.println("____________________________________________");
         String requestURI = request.getRequestURI();
-        String tenantID = request.getHeader("X-TenantID");
-        System.out.println("RequestURI::" + requestURI +" || Search for X-TenantID  :: " + tenantID);
-        System.out.println("____________________________________________");
+        String tenantID = request.getHeader(HEADER_TENANT);
+
         if (tenantID == null) {
-            response.getWriter().write("X-TenantID not present in the Request Header");
+            response.getWriter().write(NO_HEADER_TENANT);
             response.setStatus(400);
             return false;
         }

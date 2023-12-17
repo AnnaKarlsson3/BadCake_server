@@ -10,6 +10,7 @@ import com.dkserver.danielServer.repository.RoleRepo;
 import com.dkserver.danielServer.repository.UserRepo;
 import com.dkserver.danielServer.security.JwtGenerator;
 import com.dkserver.danielServer.repository.ResetPasswordTokenRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +25,8 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.dkserver.danielServer.utils.Constants.*;
 
 @Service
 public class AuthService {
@@ -110,7 +113,7 @@ public class AuthService {
             //generate Token
             ResetPasswordToken resetPasswordToken = resetPasswordTokenService.generateResetToken(user);
             sendResetPasswordEmail(email, resetPasswordToken.getToken());
-            return "ResetPassword email sent!";
+            return AUTH_RESPONSE_PASSWORD_EMAIL_SENT;
         }
         return null;
     }
@@ -119,10 +122,9 @@ public class AuthService {
     public void sendResetPasswordEmail(String email, String resetToken) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setFrom("dev.badcake@gmail.com");
-        message.setSubject("Återställ lösenord");
-        message.setText("För att återställa ditt lösenord hos BadCake, klicka på länken: "
-                + "http://localhost:8080/rest/auth/resetpassword?token=" + resetToken);
+        message.setFrom(AUTH_EMAIL_MESSAGE_FROM);
+        message.setSubject(AUTH_EMAIL_MESSAGE_SUBJECT);
+        message.setText(AUTH_EMAIL_MESSAGE_BODY + resetToken);
         mailSender.send(message);
     }
 
