@@ -20,7 +20,7 @@ public class Constants {
     public static final String NO_HEADER_TENANT = "X-TenantID not present in the Request Header";
 
     //CORS
-    public static final String CORS_URL = "http://localhost:5173";
+    public static final String CORS_URL = "https://services02.luqon.net/";
 
     //Responses
     public static final String SHORTNOTE_RESPONSE_DELETE_OK ="Shortnote post deleted successful!";
