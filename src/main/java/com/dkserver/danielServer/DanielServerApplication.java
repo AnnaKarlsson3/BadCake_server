@@ -19,7 +19,7 @@ public class DanielServerApplication {
 		SpringApplication.run(DanielServerApplication.class, args);
 	}
 
-	@Bean
+/*	@Bean
 	public ServletWebServerFactory servletContainer(){
 		//Enable SSL Traffic
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory(){
@@ -46,5 +46,5 @@ public class DanielServerApplication {
 		connector.setSecure(false);
 		connector.setRedirectPort(8443);
 		return connector;
-	}
+	}*/
 }
