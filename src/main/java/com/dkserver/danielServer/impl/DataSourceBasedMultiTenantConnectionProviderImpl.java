@@ -1,6 +1,7 @@
 package com.dkserver.danielServer.impl;
 
 import com.dkserver.danielServer.config.TenantDataSource;
+import com.dkserver.danielServer.security.AES;
 import jakarta.annotation.PostConstruct;
 import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTenantConnectionProviderImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
     @Autowired
     private ApplicationContext context;
 
+    @Autowired
+    AES aes;
+
     private Map<String, DataSource> map = new HashMap<>();
 
     boolean init = false;
@@ -38,8 +42,17 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
     protected DataSource selectDataSource(String tenantIdentifier) {
         if (!init) {
             init = true;
+            try {
+                aes.encrypt("Default encrypt");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
-            map.putAll(tenantDataSource.getAll());
+            try {
+                map.putAll(tenantDataSource.getAll());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         return map.get(tenantIdentifier) != null ? map.get(tenantIdentifier) : map.get(DEFAULT_TENANT_ID);
     }

@@ -86,7 +86,7 @@ public class AuthService {
     }
 
 
-    public String saveRegistration(RegisterDto registerDto) {
+    public String saveRegistration(RegisterDto registerDto) throws Exception {
         if(userRepo.existsByUsername(registerDto.getUsername()) || userRepo.existsByEmail(registerDto.getEmail())){
             return null;
         }

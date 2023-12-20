@@ -2,6 +2,7 @@ package com.dkserver.danielServer.services;
 
 import com.dkserver.danielServer.models.DataSourceConfigEntity;
 import com.dkserver.danielServer.repository.DataSourceConfigRepo;
+import com.dkserver.danielServer.security.AES;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +23,7 @@ public class DatabaseCreationService {
     private DataSourceConfigRepo dataSourceConfigRepo;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    AES aes;
 
     @Value("${spring.datasource.username}")
     private String databaseUsername;
@@ -30,12 +31,13 @@ public class DatabaseCreationService {
     @Value("${spring.datasource.password}")
     private String databasePassword;
 
-    public void createDatabaseForUser(String userUuid) {
+    public void createDatabaseForUser(String userUuid) throws Exception {
 
         //TODO: set string to constants.class
 
         String newDbName = "badcake_" + userUuid;
         saveDataSourceConfigToUserDb(newDbName);
+
 
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         jdbcTemplate.execute("CREATE DATABASE IF NOT EXISTS `" + newDbName + "`");
@@ -87,15 +89,15 @@ public class DatabaseCreationService {
     }
 
 
-    public void saveDataSourceConfigToUserDb(String dbName){
-        DataSourceConfigEntity dataSourceConfigEntity = new DataSourceConfigEntity();
-        dataSourceConfigEntity.setName(dbName);
-        dataSourceConfigEntity.setDriverClassName(DRIVERCLASS_NAME);
-        dataSourceConfigEntity.setUrl(NEW_JDBC_URL + dbName + USE_SSL_IN_JDBC_URL);
-        dataSourceConfigEntity.setUsername(databaseUsername);
-        dataSourceConfigEntity.setPassword(databasePassword);
-        dataSourceConfigEntity.setInitialize(true);
+    public void saveDataSourceConfigToUserDb(String dbName) throws Exception {
+           DataSourceConfigEntity dataSourceConfigEntity = new DataSourceConfigEntity();
+           dataSourceConfigEntity.setName(dbName);
+           dataSourceConfigEntity.setDriverClassName(DRIVERCLASS_NAME);
+           dataSourceConfigEntity.setUrl(NEW_JDBC_URL + dbName + USE_SSL_IN_JDBC_URL);
+           dataSourceConfigEntity.setUsername(aes.encrypt(databaseUsername));
+           dataSourceConfigEntity.setPassword(aes.encrypt(databasePassword));
+           dataSourceConfigEntity.setInitialize(true);
 
-        dataSourceConfigRepo.save(dataSourceConfigEntity);
+           dataSourceConfigRepo.save(dataSourceConfigEntity);
     }
 }

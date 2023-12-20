@@ -56,4 +56,11 @@ public class SecurityConfig {
         return new JwtAuthFilter();
     }
 
+    @Bean
+    public AES aes() throws Exception {
+        AES aes = new AES();
+        aes.init();
+        return aes;
+    }
+
 }

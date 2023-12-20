@@ -34,7 +34,7 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
+    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) throws Exception {
         String username = authService.saveRegistration(registerDto);
         if(username == null){
             return new ResponseEntity<>(AUTH_RESPONSE_TAKEN, HttpStatus.BAD_REQUEST);

@@ -1,6 +1,7 @@
 package com.dkserver.danielServer;
 
 import com.dkserver.danielServer.interceptor.TenantSchemaResolver;
+import com.dkserver.danielServer.security.AES;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
@@ -15,8 +16,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class DanielServerApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		SpringApplication.run(DanielServerApplication.class, args);
+
 	}
 
 /*	@Bean
