@@ -24,7 +24,6 @@ public class TenantDataSource {
     @Autowired
     AES aes;
 
-    private int start = 0;
 
     public DataSource getDataSource(String name) throws Exception {
         if (dataSources.get(name) != null) {
@@ -36,6 +35,28 @@ public class TenantDataSource {
         }
         return dataSource;
     }
+
+  /*  public DataSource getDataSource(String name) throws Exception {
+        if (dataSources.containsKey(name)) {
+            return dataSources.get(name);
+        }
+        DataSource dataSource = createDataSource(name);
+        if (dataSource != null) {
+            dataSources.put(name, dataSource);
+        }
+        return dataSource;
+    }*/
+
+
+    public DataSource addTenant(String tenantName) throws Exception {
+        DataSource dataSource = createDataSource(tenantName);
+        if (dataSource != null) {
+            dataSources.put(tenantName, dataSource);
+        }
+        return dataSource;
+    }
+
+
 
     @PostConstruct
     public Map<String, DataSource> getAll() throws Exception {
@@ -51,12 +72,16 @@ public class TenantDataSource {
     private DataSource createDataSource(String name) throws Exception {
         DataSourceConfigEntity config = configRepo.findByName(name);
         if (config != null) {
+            String decryptedUsername = aes.decrypt(config.getUsername());
+            String decryptedPassword = aes.decrypt(config.getPassword());
+
             DataSourceBuilder factory = DataSourceBuilder
                     .create().driverClassName(config.getDriverClassName())
-                    .username(aes.decrypt(config.getUsername()))
-                    .password(aes.decrypt(config.getPassword()))
+                    .username(decryptedUsername)
+                    .password(decryptedPassword)
                     .url(config.getUrl());
             DataSource ds = factory.build();
+
             return ds;
         }
         return null;

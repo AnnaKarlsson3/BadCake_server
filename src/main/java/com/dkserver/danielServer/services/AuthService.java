@@ -1,8 +1,10 @@
 package com.dkserver.danielServer.services;
 
 
+import com.dkserver.danielServer.config.TenantDataSource;
 import com.dkserver.danielServer.dto.LoginDto;
 import com.dkserver.danielServer.dto.RegisterDto;
+import com.dkserver.danielServer.impl.DataSourceBasedMultiTenantConnectionProviderImpl;
 import com.dkserver.danielServer.models.ResetPasswordToken;
 import com.dkserver.danielServer.models.Role;
 import com.dkserver.danielServer.models.UserEntity;
@@ -98,10 +100,9 @@ public class AuthService {
 
         Role roles = roleRepo.findByName("USER").get();
         user.setRoles(Collections.singletonList(roles));
-
-        databaseCreationService.createDatabaseForUser(user.getId());
         userRepo.save(user);
 
+        databaseCreationService.createDatabaseForUser(user.getId());
         return user.getUsername();
     }
 

@@ -21,11 +21,6 @@ public class CustomerController {
 
     @PostMapping("/customer")
     public ResponseEntity saveCustomerData(@RequestBody CustomerEntity customerEntity){
-        System.out.println(customerEntity.getAddress());
-        System.out.println(customerEntity.getAdminName());
-        System.out.println(customerEntity.getContact());
-        System.out.println(customerEntity.getCity());
-        System.out.println(customerEntity.getOrgNr());
 
         CustomerEntity customerEntityData = customerService.saveCustomerDataToDb(customerEntity);
         if(customerEntityData == null){

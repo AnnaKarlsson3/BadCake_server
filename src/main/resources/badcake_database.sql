@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `datasource_config` (
   `name` varchar(500) NOT NULL,
   `url` varchar(500) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(500) NOT NULL,
   `driverclass_name` varchar(50) NOT NULL,
   `initialize` smallint(6) NOT NULL,
   PRIMARY KEY (`id`)

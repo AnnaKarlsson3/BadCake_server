@@ -16,6 +16,7 @@ public class Constants {
 
     //Tenant setup
     public static final String DEFAULT_TENANT ="PUBLIC";
+    public static final String DEFAULT_TENANT_ID = "badcake";
     public static final String HEADER_TENANT ="X-TenantID";
     public static final String NO_HEADER_TENANT = "X-TenantID not present in the Request Header";
 
